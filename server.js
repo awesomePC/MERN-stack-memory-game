@@ -6,7 +6,8 @@ const app = express();
 // Connect DB
 connectDB();
 
-app.get('/', (req, res) => res.json({ msg: 'working' }));
+// Initialize middleware
+app.use(express.json({ extended: false }))
 
 // Define Routes
 app.use('/api/auth', require('./routes/auth'));
