@@ -7,8 +7,8 @@ const Signin = () => {
         <form className='col s6'>
           <div className='row'>
             <div className='input-field col s9 offset-s8'>
-              <input id='user_name' type='text' className='validate'></input>
-              <label htmlFor='user_name'>Username</label>
+              <input id='user-name' type='text' className='validate'></input>
+              <label htmlFor='user-name'>Username</label>
             </div>
           </div>
           <div className='row'>
@@ -23,8 +23,8 @@ const Signin = () => {
               type='submit'
               name='action'
             >
-              Submit
-              <i class='material-icons right'>send</i>
+              Sign In
+              <i className='material-icons right'>send</i>
             </button>
           </div>
         </form>
