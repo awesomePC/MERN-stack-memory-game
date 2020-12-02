@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import HistoryContext from '../../context/history/historyContext';
 
 const Home = () => {
@@ -6,9 +7,29 @@ const Home = () => {
 
   const { games } = historyContext;
 
-  const begNumMoves = 403;
-  const intNumMoves = 0;
-  const expNumMoves = 0;
+  const getBegAvg = (gamesHistory) => {
+    const begArr = gamesHistory
+      .filter((game) => game.gameLevel === 'beginner')
+      .map((game) => game.numOfMoves);
+
+    return begArr.reduce((a, b) => a + b) / begArr.length;
+  };
+
+  const getIntAvg = (gamesHistory) => {
+    const begArr = gamesHistory
+      .filter((game) => game.gameLevel === 'intermediate')
+      .map((game) => game.numOfMoves);
+
+    return begArr.reduce((a, b) => a + b) / begArr.length;
+  };
+
+  const getExpAvg = (gamesHistory) => {
+    const begArr = gamesHistory
+      .filter((game) => game.gameLevel === 'expert')
+      .map((game) => game.numOfMoves);
+
+    return begArr.reduce((a, b) => a + b) / begArr.length;
+  };
 
   return (
     <div className='row container'>
@@ -37,13 +58,13 @@ const Home = () => {
             </div>
             <div className='row col s12'>
               <div className='col s4 center'>
-                <p>{begNumMoves}</p>
+                <p>{getBegAvg(games)}</p>
               </div>
               <div className='col s4 center'>
-                <p>{intNumMoves}</p>
+                <p>{getIntAvg(games)}</p>
               </div>
               <div className='col s4 center'>
-                <p>{expNumMoves}</p>
+                <p>{getExpAvg(games)}</p>
               </div>
             </div>
             <br></br>
@@ -56,13 +77,19 @@ const Home = () => {
           </div>
           <div className='col s12 card-action'>
             <div className='col s4 center'>
-              <a className='waves-effect waves-red btn-flat'>Beginner</a>
+              <Link to='/game' className='waves-effect waves-red btn-flat'>
+                Beginner
+              </Link>
             </div>
             <div className='col s4 center'>
-              <a className='waves-effect waves-red btn-flat'>Intermediate</a>
+              <Link to='/game' className='waves-effect waves-red btn-flat'>
+                Intermediate
+              </Link>
             </div>
             <div className='col s4 center'>
-              <a className='waves-effect waves-red btn-flat'>Expert</a>
+              <Link to='/game' className='waves-effect waves-red btn-flat'>
+                Expert
+              </Link>
             </div>
           </div>
         </div>
