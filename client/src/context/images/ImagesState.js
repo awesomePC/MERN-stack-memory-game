@@ -4,7 +4,20 @@ import imagesReducer from './imagesReducer';
 
 const ImagesState = (props) => {
   const initialState = {
-    robots: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
+    robots: [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 5 },
+      { id: 6 },
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 5 },
+      { id: 6 },
+    ],
   };
 
   const [state, dispatch] = useReducer(imagesReducer, initialState);

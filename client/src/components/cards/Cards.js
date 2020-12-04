@@ -7,7 +7,13 @@ const Cards = () => {
 
   const { robots } = imagesContext;
 
-  return robots.map((robot) => <CardItem key={robot.id} id={robot.id} />);
+  return (
+    <div className='mem-cards-container'>
+      {robots.map((robot) => (
+        <CardItem key={Math.floor(Math.random() * 100) + 1} id={robot.id} />
+      ))}
+    </div>
+  );
 };
 
 export default Cards;

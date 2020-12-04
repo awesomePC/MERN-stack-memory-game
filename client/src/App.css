@@ -1,0 +1,22 @@
+.mem-cards-container {
+  border: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.mem-card {
+  height: 100px;
+  width: 100px;
+  background-color: #546e7a;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+}

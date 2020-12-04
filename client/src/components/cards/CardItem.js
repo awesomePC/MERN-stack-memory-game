@@ -1,22 +1,18 @@
 import React from 'react';
 
+const onClick = (e) => {
+  console.log(document.getElementById('random'));
+  if (document.getElementById('random').style.display === 'none') {
+    document.getElementById('random').style.display = 'flex';
+  } else {
+    document.getElementById('random').style.display = 'none';
+  }
+};
+
 const CardItem = ({ id }) => {
   return (
-    <div className='row'>
-      <div className='col s12 m6'>
-        <div className='activator card blue-grey darken-1'>
-          <div className='activator waves-effect waves-block waves-light'>
-            <div className='activator card-content white-text'>
-              <span className='card-title'>Reveal Me!</span>
-            </div>
-          </div>
-          <div className='card-reveal'>
-            <div className='card-image'>
-              <img alt='robots' src={`https://robohash.org/${id}`} />
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id='random' className='mem-card' onClick={onClick}>
+      <img alt='robot' src={`https://robohash.org/${id}`}></img>
     </div>
   );
 };
