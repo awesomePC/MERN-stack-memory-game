@@ -1,18 +1,48 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import ImagesContext from '../../context/images/imagesContext';
 
-const onClick = (e) => {
-  console.log(document.getElementById('random'));
-  if (document.getElementById('random').style.display === 'none') {
-    document.getElementById('random').style.display = 'flex';
-  } else {
-    document.getElementById('random').style.display = 'none';
-  }
-};
+const CardItem = ({ id, robotId }) => {
+  const imagesContext = useContext(ImagesContext);
 
-const CardItem = ({ id }) => {
+  const { tempId } = imagesContext;
+
+  const [show, setShow] = useState(false);
+  // const [found, setFound] = useState(false);
+
+  const updateShow = () => {
+    let current = show;
+    setShow(!current);
+  };
+
+  // const updateFound = () => {
+  //   let current = found;
+  //   setFound(!current);
+  // };
+
+  const onClick = (e) => {
+    if (tempId === '') {
+      updateShow();
+      document.getElementById(e.target.id).style.pointerEvents = 'none';
+      // imagesContext.storeTempId(e.target.id);
+    } else {
+      console.log(show);
+    }
+  };
+
   return (
-    <div id='random' className='mem-card' onClick={onClick}>
-      <img alt='robot' src={`https://robohash.org/${id}`}></img>
+    <div
+      id={id}
+      className='mem-card'
+      style={{ backgroundColor: show ? '#D3D3D3' : null }}
+      onClick={onClick}
+    >
+      {show ? (
+        <img
+          imgid={robotId}
+          alt='robot'
+          src={`https://robohash.org/${robotId}`}
+        ></img>
+      ) : null}
     </div>
   );
 };

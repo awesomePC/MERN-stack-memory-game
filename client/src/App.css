@@ -1,3 +1,7 @@
+.game-board {
+  border: 2px solid green;
+}
+
 .mem-cards-container {
   border: 2px solid red;
   display: flex;

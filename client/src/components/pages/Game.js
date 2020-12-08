@@ -3,7 +3,7 @@ import Cards from '../cards/Cards';
 
 const Game = () => {
   return (
-    <div>
+    <div className='game-board'>
       <Cards />
     </div>
   );

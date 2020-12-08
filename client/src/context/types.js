@@ -1,2 +1,1 @@
-export const ADD_GAME = 'ADD_GAME';
-export const DELETE_GAMES = 'DELETE_GAMES';
+export const STORE_TEMPID = 'STORE_TEMPID';

@@ -9,8 +9,12 @@ const Cards = () => {
 
   return (
     <div className='mem-cards-container'>
-      {robots.map((robot) => (
-        <CardItem key={Math.floor(Math.random() * 100) + 1} id={robot.id} />
+      {robots.map((robot, index) => (
+        <CardItem
+          key={Math.floor(Math.random() * 1000) + 1}
+          id={index}
+          robotId={robot.id}
+        />
       ))}
     </div>
   );
