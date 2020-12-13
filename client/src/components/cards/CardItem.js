@@ -1,48 +1,35 @@
-import React, { useState, useContext } from 'react';
-import ImagesContext from '../../context/images/imagesContext';
+import React, { useState, useEffect } from 'react';
 
-const CardItem = ({ id, robotId }) => {
-  const imagesContext = useContext(ImagesContext);
-
-  const { tempId } = imagesContext;
-
+const CardItem = ({ id, imageId, shownCards, cardClicked }) => {
   const [show, setShow] = useState(false);
-  // const [found, setFound] = useState(false);
 
-  const updateShow = () => {
-    let current = show;
-    setShow(!current);
-  };
-
-  // const updateFound = () => {
-  //   let current = found;
-  //   setFound(!current);
-  // };
+  useEffect(() => {
+    let buff = shownCards.includes(id);
+    setShow(buff);
+  }, [shownCards]);
 
   const onClick = (e) => {
-    if (tempId === '') {
-      updateShow();
-      document.getElementById(e.target.id).style.pointerEvents = 'none';
-      // imagesContext.storeTempId(e.target.id);
-    } else {
-      console.log(show);
-    }
+    cardClicked(e.target);
   };
 
   return (
     <div
       id={id}
+      imgid={imageId}
       className='mem-card'
-      style={{ backgroundColor: show ? '#D3D3D3' : null }}
+      style={{
+        backgroundColor: show ? '#D3D3D3' : null,
+        pointerEvents: show ? 'none' : 'auto',
+      }}
       onClick={onClick}
     >
-      {show ? (
-        <img
-          imgid={robotId}
-          alt='robot'
-          src={`https://robohash.org/${robotId}`}
-        ></img>
-      ) : null}
+      <img
+        id={id}
+        imgid={imageId}
+        alt='card-figure'
+        src={`https://robohash.org/${imageId}`}
+        style={{ visibility: !show ? 'hidden' : 'visible' }}
+      ></img>
     </div>
   );
 };
