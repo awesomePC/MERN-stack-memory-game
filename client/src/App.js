@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layouts/Navbar';
 import Home from './components/pages/Home';
@@ -10,6 +10,9 @@ import HistoryState from './context/history/HistoryState';
 import './App.css';
 
 const App = () => {
+  useEffect(() => {
+    window.M.AutoInit();
+  }, []);
   return (
     <HistoryState>
       <Router>

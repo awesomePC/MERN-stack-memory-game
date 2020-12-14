@@ -1,7 +1,12 @@
 import React, { useReducer } from 'react';
 import HistoryContext from './historyContext';
 import historyReducer from './historyReducer';
-import { ADD_GAME, DELETE_GAMES } from '../types';
+import {
+  ADD_GAME,
+  DELETE_GAMES,
+  UPDATE_CURRENT_LEVEL,
+  UPDATE_CURRENT_THEME,
+} from '../types';
 
 const HistoryState = (props) => {
   const initialState = {
@@ -49,6 +54,8 @@ const HistoryState = (props) => {
         date: Date.now(),
       },
     ],
+    currentLevel: '',
+    currentTheme: 'robots',
   };
 
   const [state, dispatch] = useReducer(historyReducer, initialState);
@@ -57,10 +64,24 @@ const HistoryState = (props) => {
 
   // Delete all games from history
 
+  // Update currentLevel
+  const updateCurrentLevel = (level) => {
+    dispatch({ type: UPDATE_CURRENT_LEVEL, payload: level });
+  };
+
+  // update currentTheme
+  const updateCurrentTheme = (theme) => {
+    dispatch({ type: UPDATE_CURRENT_THEME, payload: theme });
+  };
+
   return (
     <HistoryContext.Provider
       value={{
         games: state.games,
+        currentLevel: state.currentLevel,
+        currentTheme: state.currentTheme,
+        updateCurrentLevel,
+        updateCurrentTheme,
       }}
     >
       {props.children}

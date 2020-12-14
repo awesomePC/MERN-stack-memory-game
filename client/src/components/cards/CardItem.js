@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const CardItem = ({ id, imageId, shownCards, cardClicked }) => {
+const CardItem = ({ id, imageId, shownCards, cardClicked, source }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const CardItem = ({ id, imageId, shownCards, cardClicked }) => {
         id={id}
         imgid={imageId}
         alt='card-figure'
-        src={`https://robohash.org/${imageId}`}
+        src={`https://robohash.org/${imageId}` + source}
         style={{ visibility: !show ? 'hidden' : 'visible' }}
       ></img>
     </div>

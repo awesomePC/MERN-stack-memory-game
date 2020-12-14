@@ -5,7 +5,7 @@ import HistoryContext from '../../context/history/historyContext';
 const Home = () => {
   const historyContext = useContext(HistoryContext);
 
-  const { games } = historyContext;
+  const { games, updateCurrentLevel, updateCurrentTheme } = historyContext;
 
   const getBegAvg = (gamesHistory) => {
     const begArr = gamesHistory
@@ -29,6 +29,14 @@ const Home = () => {
       .map((game) => game.numOfMoves);
 
     return begArr.reduce((a, b) => a + b) / begArr.length;
+  };
+
+  const onClick = (e) => {
+    updateCurrentLevel(e.target.name);
+  };
+
+  const handleClick = (e) => {
+    updateCurrentTheme(e.target.name);
   };
 
   return (
@@ -75,19 +83,62 @@ const Home = () => {
             <br></br>
             <span className='center card-title'>Start A New Game Below!</span>
           </div>
+          <div className='center-align'>
+            <a
+              className='dropdown-trigger btn blue-grey darken-1'
+              href='#'
+              data-target='dropdown1'
+            >
+              Choose A Theme!
+            </a>
+            <ul id='dropdown1' className='dropdown-content'>
+              <li>
+                <a href='#!' onClick={handleClick} name='robots'>
+                  Robots
+                </a>
+              </li>
+              <li className='divider' tabIndex='-1'></li>
+              <li>
+                <a href='#!' onClick={handleClick} name='cats'>
+                  Cats
+                </a>
+              </li>
+              <li className='divider' tabIndex='-1'></li>
+              <li>
+                <a href='#!' onClick={handleClick} name='monsters'>
+                  Monsters
+                </a>
+              </li>
+            </ul>
+          </div>
           <div className='col s12 card-action'>
             <div className='col s4 center'>
-              <Link to='/game' className='waves-effect waves-red btn-flat'>
+              <Link
+                to='/game'
+                className='waves-effect waves-red btn-flat'
+                name='beginner'
+                onClick={onClick}
+              >
                 Beginner
               </Link>
             </div>
             <div className='col s4 center'>
-              <Link to='/game' className='waves-effect waves-red btn-flat'>
+              <Link
+                to='/game'
+                className='waves-effect waves-red btn-flat'
+                name='intermediate'
+                onClick={onClick}
+              >
                 Intermediate
               </Link>
             </div>
             <div className='col s4 center'>
-              <Link to='/game' className='waves-effect waves-red btn-flat'>
+              <Link
+                to='/game'
+                className='waves-effect waves-red btn-flat'
+                name='expert'
+                onClick={onClick}
+              >
                 Expert
               </Link>
             </div>
