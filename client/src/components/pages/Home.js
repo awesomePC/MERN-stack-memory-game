@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import HistoryContext from '../../context/history/historyContext';
 
@@ -6,6 +6,8 @@ const Home = () => {
   const historyContext = useContext(HistoryContext);
 
   const { games, updateCurrentLevel, updateCurrentTheme } = historyContext;
+
+  const [chosenTheme, setChosenTheme] = useState('');
 
   const getBegAvg = (gamesHistory) => {
     const begArr = gamesHistory
@@ -37,6 +39,7 @@ const Home = () => {
 
   const handleClick = (e) => {
     updateCurrentTheme(e.target.name);
+    setChosenTheme(e.target.name);
   };
 
   return (
@@ -89,7 +92,7 @@ const Home = () => {
               href='#'
               data-target='dropdown1'
             >
-              Choose A Theme!
+              {chosenTheme.length > 0 ? chosenTheme : 'Choose A Theme!'}
             </a>
             <ul id='dropdown1' className='dropdown-content'>
               <li>

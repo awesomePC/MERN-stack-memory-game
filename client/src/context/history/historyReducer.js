@@ -1,4 +1,8 @@
-import { UPDATE_CURRENT_LEVEL, UPDATE_CURRENT_THEME } from '../types';
+import {
+  UPDATE_CURRENT_LEVEL,
+  UPDATE_CURRENT_THEME,
+  ADD_NEW_GAME,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -11,6 +15,11 @@ export default (state, action) => {
       return {
         ...state,
         currentTheme: action.payload,
+      };
+    case ADD_NEW_GAME:
+      return {
+        ...state,
+        games: [...state.games, action.payload],
       };
     default:
       return state;

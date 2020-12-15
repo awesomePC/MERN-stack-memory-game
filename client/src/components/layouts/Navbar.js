@@ -17,7 +17,7 @@ const Navbar = () => {
             <Link to='/signin'>Sign In</Link>
           </li>
           <li>
-            <Link to='/home'>Sign Out</Link>
+            <Link to='/signin'>Sign Out</Link>
           </li>
         </ul>
       </div>

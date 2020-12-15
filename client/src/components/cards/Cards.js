@@ -6,6 +6,7 @@ const Cards = ({
   updateNumOfMoves,
   currentLevel,
   currentTheme,
+  updateNewGame,
 }) => {
   const [images, setImages] = useState([]);
   const [shownCards, setShownCards] = useState([]);
@@ -17,16 +18,16 @@ const Cards = ({
     let number;
     switch (currentLevel) {
       case 'beginner':
-        number = 20;
+        number = 12;
         break;
       case 'intermediate':
-        number = 30;
+        number = 20;
         break;
       case 'expert':
-        number = 42;
+        number = 30;
         break;
       default:
-        number = 20;
+        number = 12;
     }
 
     let buffer = [];
@@ -39,6 +40,10 @@ const Cards = ({
       }
       buffer.push({ id: temp });
     }
+
+    buffer.sort((a, b) => {
+      return 0.5 - Math.random();
+    });
 
     setImages(buffer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,6 +81,13 @@ const Cards = ({
         if (shownCards.length === images.length - 1) {
           updateNumOfMoves(count);
           setTimeout(() => {
+            // updateNewGame({
+            //   id: 7,
+            //   user: 'User1',
+            //   gameLevel: currentLevel,
+            //   numOfMoves: count,
+            //   date: Date.now(),
+            // });
             updateActive();
           }, 1000);
         }
@@ -91,8 +103,6 @@ const Cards = ({
         }, 2000);
       }
     }
-    console.log(currCards);
-    console.log(shownCards);
   };
 
   const noClicking = () => {
@@ -100,7 +110,17 @@ const Cards = ({
   };
 
   return (
-    <div className='mem-cards-container'>
+    <div
+      className='mem-cards-container'
+      style={{
+        maxWidth:
+          currentLevel === 'beginner'
+            ? '500px'
+            : currentLevel === 'intermediate'
+            ? '600px'
+            : '700px',
+      }}
+    >
       {images.map((image, index) => (
         <CardItem
           key={index}

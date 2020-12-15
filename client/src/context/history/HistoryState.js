@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import HistoryContext from './historyContext';
 import historyReducer from './historyReducer';
 import {
-  ADD_GAME,
+  ADD_NEW_GAME,
   DELETE_GAMES,
   UPDATE_CURRENT_LEVEL,
   UPDATE_CURRENT_THEME,
@@ -61,6 +61,9 @@ const HistoryState = (props) => {
   const [state, dispatch] = useReducer(historyReducer, initialState);
 
   // Add game to history
+  const addNewGame = (newGame) => {
+    dispatch({ tpye: ADD_NEW_GAME, payload: newGame });
+  };
 
   // Delete all games from history
 
@@ -82,6 +85,7 @@ const HistoryState = (props) => {
         currentTheme: state.currentTheme,
         updateCurrentLevel,
         updateCurrentTheme,
+        addNewGame,
       }}
     >
       {props.children}
