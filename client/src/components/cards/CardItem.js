@@ -6,6 +6,7 @@ const CardItem = ({ id, imageId, shownCards, cardClicked, source }) => {
   useEffect(() => {
     let buff = shownCards.includes(id);
     setShow(buff);
+    // eslint-disable-next-line
   }, [shownCards]);
 
   const onClick = (e) => {

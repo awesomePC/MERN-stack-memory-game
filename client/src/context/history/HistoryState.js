@@ -1,68 +1,63 @@
 import React, { useReducer } from 'react';
+import axios from 'axios';
 import HistoryContext from './historyContext';
 import historyReducer from './historyReducer';
 import {
   ADD_NEW_GAME,
-  DELETE_GAMES,
   UPDATE_CURRENT_LEVEL,
   UPDATE_CURRENT_THEME,
+  GAME_ERROR,
+  GET_GAMES,
 } from '../types';
 
 const HistoryState = (props) => {
   const initialState = {
-    games: [
-      {
-        id: 1,
-        user: 'User1',
-        gameLevel: 'beginner',
-        numOfMoves: 13,
-        date: Date.now(),
-      },
-      {
-        id: 2,
-        user: 'User1',
-        gameLevel: 'beginner',
-        numOfMoves: 18,
-        date: Date.now(),
-      },
-      {
-        id: 3,
-        user: 'User1',
-        gameLevel: 'beginner',
-        numOfMoves: 23,
-        date: Date.now(),
-      },
-      {
-        id: 4,
-        user: 'User1',
-        gameLevel: 'intermediate',
-        numOfMoves: 23,
-        date: Date.now(),
-      },
-      {
-        id: 5,
-        user: 'User1',
-        gameLevel: 'expert',
-        numOfMoves: 38,
-        date: Date.now(),
-      },
-      {
-        id: 6,
-        user: 'User1',
-        gameLevel: 'expert',
-        numOfMoves: 57,
-        date: Date.now(),
-      },
-    ],
-    currentLevel: '',
+    games: [],
+    currentLevel: 'beginner',
     currentTheme: 'robots',
+    error: null,
   };
 
   const [state, dispatch] = useReducer(historyReducer, initialState);
 
+  // Get games for user
+  const getGames = async () => {
+    try {
+      const res = await axios.get('/api/history');
+
+      dispatch({
+        type: GET_GAMES,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GAME_ERROR,
+        payload: error.response.msg,
+      });
+    }
+  };
+
   // Add game to history
-  const addNewGame = (newGame) => {
-    dispatch({ tpye: ADD_NEW_GAME, payload: newGame });
+  const addNewGame = async (newGame) => {
+    const config = {
+      header: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post('/api/history', newGame, config);
+
+      dispatch({
+        type: ADD_NEW_GAME,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GAME_ERROR,
+        payload: error.response.msg,
+      });
+    }
   };
 
   // Delete all games from history
@@ -72,7 +67,7 @@ const HistoryState = (props) => {
     dispatch({ type: UPDATE_CURRENT_LEVEL, payload: level });
   };
 
-  // update currentTheme
+  // Update currentTheme
   const updateCurrentTheme = (theme) => {
     dispatch({ type: UPDATE_CURRENT_THEME, payload: theme });
   };
@@ -83,9 +78,11 @@ const HistoryState = (props) => {
         games: state.games,
         currentLevel: state.currentLevel,
         currentTheme: state.currentTheme,
+        error: state.error,
         updateCurrentLevel,
         updateCurrentTheme,
         addNewGame,
+        getGames,
       }}
     >
       {props.children}

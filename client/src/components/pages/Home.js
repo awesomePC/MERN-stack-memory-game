@@ -1,36 +1,41 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HistoryContext from '../../context/history/historyContext';
+import AuthContext from '../../context/auth/authContext';
 
 const Home = () => {
   const historyContext = useContext(HistoryContext);
+  const authContext = useContext(AuthContext);
 
-  const { games, updateCurrentLevel, updateCurrentTheme } = historyContext;
+  const {
+    games,
+    updateCurrentLevel,
+    updateCurrentTheme,
+    getGames,
+  } = historyContext;
 
   const [chosenTheme, setChosenTheme] = useState('');
 
-  const getBegAvg = (gamesHistory) => {
-    const begArr = gamesHistory
-      .filter((game) => game.gameLevel === 'beginner')
+  useEffect(() => {
+    authContext.loadUser();
+    getGames();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    window.M.AutoInit();
+  });
+
+  const getAvg = (data) => {
+    const gameArr = data[0]
+      .filter((game) => game.gameLevel === data[1])
       .map((game) => game.numOfMoves);
 
-    return begArr.reduce((a, b) => a + b) / begArr.length;
-  };
-
-  const getIntAvg = (gamesHistory) => {
-    const begArr = gamesHistory
-      .filter((game) => game.gameLevel === 'intermediate')
-      .map((game) => game.numOfMoves);
-
-    return begArr.reduce((a, b) => a + b) / begArr.length;
-  };
-
-  const getExpAvg = (gamesHistory) => {
-    const begArr = gamesHistory
-      .filter((game) => game.gameLevel === 'expert')
-      .map((game) => game.numOfMoves);
-
-    return begArr.reduce((a, b) => a + b) / begArr.length;
+    if (gameArr.length > 0) {
+      return Math.floor(gameArr.reduce((a, b) => a + b) / gameArr.length);
+    } else {
+      return 'No games yet played';
+    }
   };
 
   const onClick = (e) => {
@@ -69,13 +74,13 @@ const Home = () => {
             </div>
             <div className='row col s12'>
               <div className='col s4 center'>
-                <p>{getBegAvg(games)}</p>
+                <p>{getAvg([games, 'beginner'])}</p>
               </div>
               <div className='col s4 center'>
-                <p>{getIntAvg(games)}</p>
+                <p>{getAvg([games, 'intermediate'])}</p>
               </div>
               <div className='col s4 center'>
-                <p>{getExpAvg(games)}</p>
+                <p>{getAvg([games, 'expert'])}</p>
               </div>
             </div>
             <br></br>
@@ -96,19 +101,34 @@ const Home = () => {
             </a>
             <ul id='dropdown1' className='dropdown-content'>
               <li>
-                <a href='#!' onClick={handleClick} name='robots'>
+                <a
+                  href='#'
+                  onClick={handleClick}
+                  name='robots'
+                  className='blue-grey-text text-darken-1'
+                >
                   Robots
                 </a>
               </li>
               <li className='divider' tabIndex='-1'></li>
               <li>
-                <a href='#!' onClick={handleClick} name='cats'>
+                <a
+                  href='#'
+                  onClick={handleClick}
+                  name='cats'
+                  className='blue-grey-text text-darken-1'
+                >
                   Cats
                 </a>
               </li>
               <li className='divider' tabIndex='-1'></li>
               <li>
-                <a href='#!' onClick={handleClick} name='monsters'>
+                <a
+                  href='#'
+                  onClick={handleClick}
+                  name='monsters'
+                  className='blue-grey-text text-darken-1'
+                >
                   Monsters
                 </a>
               </li>

@@ -27,31 +27,31 @@ router.post('/', auth, async (req, res) => {
     const newGame = new Game({
       gameLevel: gameLevel,
       numOfMoves: numOfMoves,
-      user: req.user.id
-    })
+      user: req.user.id,
+    });
 
     const game = await newGame.save();
 
     res.json(game);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error')
-  }
-});
-
-// @route   DELETE api/history
-// @desc    Delete user history
-// @access  Private
-router.delete('/', auth, async (req, res) => {
-  try {
-    await Game.deleteMany({ user: req.user.id });
-
-    res.json({ msg: 'Games Cleared' });
-
-  } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
+
+// // @route   DELETE api/history
+// // @desc    Delete user history
+// // @access  Private
+// router.delete('/', auth, async (req, res) => {
+//   try {
+//     await Game.deleteMany({ user: req.user.id });
+
+//     res.json({ msg: 'Games Cleared' });
+
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
 module.exports = router;

@@ -81,13 +81,11 @@ const Cards = ({
         if (shownCards.length === images.length - 1) {
           updateNumOfMoves(count);
           setTimeout(() => {
-            // updateNewGame({
-            //   id: 7,
-            //   user: 'User1',
-            //   gameLevel: currentLevel,
-            //   numOfMoves: count,
-            //   date: Date.now(),
-            // });
+            updateNewGame({
+              gameLevel: currentLevel,
+              numOfMoves: count,
+              date: Date.now(),
+            });
             updateActive();
           }, 1000);
         }

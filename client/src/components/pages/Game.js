@@ -1,22 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HistoryContext from '../../context/history/historyContext';
+import AuthContext from '../../context/auth/authContext';
 import Cards from '../cards/Cards';
 
 const Game = () => {
   const historyContext = useContext(HistoryContext);
+  const authContext = useContext(AuthContext);
 
-  const { games, currentLevel, currentTheme, addNewGame } = historyContext;
+  const { currentLevel, currentTheme, addNewGame } = historyContext;
 
   const [active, setActive] = useState(true);
   const [curNumOfMoves, setCurNumOfMoves] = useState(0);
   const [newGame, setNewGame] = useState({
-    id: 0,
-    user: 'User1',
     gameLevel: '',
     numOfMoves: 0,
     date: Date.now(),
   });
+
+  useEffect(() => {
+    authContext.loadUser();
+    // eslint-disable-next-line
+  }, []);
 
   const updateActive = () => {
     let cur = active;
@@ -27,14 +32,12 @@ const Game = () => {
     setCurNumOfMoves(count);
   };
 
-  // const updateNewGame = (newGame) => {
-  //   setNewGame(newGame);
-  // };
+  const updateNewGame = (newGame) => {
+    setNewGame(newGame);
+  };
 
   const onClick = (e) => {
-    //   addNewGame(newGame);
-    //   console.log(newGame);
-    //   console.log(games);
+    addNewGame(newGame);
   };
 
   return (
@@ -45,7 +48,7 @@ const Game = () => {
           updateNumOfMoves={updateCurNumOfMoves}
           currentLevel={currentLevel}
           currentTheme={currentTheme}
-          // updateNewGame={updateNewGame}
+          updateNewGame={updateNewGame}
         />
       ) : (
         <div className='row container'>
@@ -61,7 +64,7 @@ const Game = () => {
                 <div className='col s12 card-action'>
                   <div className='col s12 center'>
                     <Link
-                      to='/home'
+                      to='/'
                       className='waves-effect waves-red btn-flat'
                       onClick={onClick}
                     >
