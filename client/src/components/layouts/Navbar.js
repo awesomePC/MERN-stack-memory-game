@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
 const Navbar = () => {
+  // declare and destructure authcontext
   const authContext = useContext(AuthContext);
 
   const { isAuthenticated, logout, user } = authContext;
 
+  // logout user
   const onLogOut = () => {
     logout();
   };
 
+  // fragment displays of user signed in
   const authLinks = (
     <Fragment>
       <li>Hello, {user && user.name}!</li>
@@ -20,6 +23,7 @@ const Navbar = () => {
     </Fragment>
   );
 
+  // fragment displays if user is not signed in
   const guestLinks = (
     <Fragment>
       <li>
@@ -32,12 +36,14 @@ const Navbar = () => {
   );
 
   return (
+    // materializeCSS navbar
     <nav>
       <div className='nav-wrapper'>
         <a href='/' className='brand-logo'>
           <i className='material-icons'>memory</i>
           Memory
         </a>
+        {/* check if user signed in or not */}
         <ul id='nav-mobile' className='right'>
           {isAuthenticated ? authLinks : guestLinks}
         </ul>

@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 
+// bring in props, declare authContext and destructure
 const Signin = (props) => {
   const authContext = useContext(AuthContext);
 
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
+  // declare state and desstructure
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -14,10 +16,12 @@ const Signin = (props) => {
   const { email, password } = user;
 
   useEffect(() => {
+    // if user is signed in, go to homepage
     if (isAuthenticated) {
       props.history.push('/');
     }
 
+    // send err msg if user not recognized
     if (error === 'invalid credentials') {
       alert(error);
       clearErrors();
@@ -25,10 +29,12 @@ const Signin = (props) => {
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 
+  // store user input on change
   const onChange = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value });
   };
 
+  // call login with user info on form submit
   const onSubmit = (e) => {
     e.preventDefault();
     login({
@@ -38,6 +44,7 @@ const Signin = (props) => {
   };
 
   return (
+    // materializeCSS form
     <div className='container form-container'>
       <div className='row'>
         <form className='col s6' autoComplete='off' onSubmit={onSubmit}>

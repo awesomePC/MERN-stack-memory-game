@@ -8,9 +8,11 @@ const Game = require('../models/Games');
 // @desc    Retrieve user history
 // @access  Private
 router.get('/', auth, async (req, res) => {
+  // declare games variable from database and json variable
   try {
     const games = await Game.find({ user: req.user.id });
     res.json(games);
+    // return error if found
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -21,8 +23,10 @@ router.get('/', auth, async (req, res) => {
 // @desc    Add user history
 // @access  Private
 router.post('/', auth, async (req, res) => {
+  // declare variables from request
   const { gameLevel, numOfMoves } = req.body;
 
+  // declare newGame model with request info
   try {
     const newGame = new Game({
       gameLevel: gameLevel,
@@ -30,9 +34,10 @@ router.post('/', auth, async (req, res) => {
       user: req.user.id,
     });
 
+    // save new game to database and return json
     const game = await newGame.save();
-
     res.json(game);
+    // return error if found
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

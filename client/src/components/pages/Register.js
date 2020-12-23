@@ -1,11 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 
+// bring in props
 const Register = (props) => {
+  // declare and destructure authContext
   const authContext = useContext(AuthContext);
 
   const { register, error, clearErrors, isAuthenticated } = authContext;
 
+  // declare and destructure component level state
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -14,11 +17,13 @@ const Register = (props) => {
 
   const { name, email, password } = user;
 
+  // if user is signed in, go to homepage
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push('/');
     }
 
+    // if errors, alert user and clear errors
     if (error === 'Email already exists') {
       alert(error);
       clearErrors();
@@ -26,10 +31,12 @@ const Register = (props) => {
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 
+  // store user input on change
   const onChange = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value });
   };
 
+  // register user with input object on form submit
   const onSubmit = (e) => {
     e.preventDefault();
     register({
@@ -40,6 +47,7 @@ const Register = (props) => {
   };
 
   return (
+    // materialize CSS form
     <div className='container form-container'>
       <div className='row'>
         <form className='col s6' onSubmit={onSubmit}>

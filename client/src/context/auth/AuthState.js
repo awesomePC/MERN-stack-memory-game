@@ -15,6 +15,7 @@ import {
 } from '../types';
 
 const AuthState = (props) => {
+  // declare inicial state
   const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
@@ -23,14 +24,17 @@ const AuthState = (props) => {
     error: null,
   };
 
+  // declare state/dispatch with useReducer hook
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
   const loadUser = async () => {
+    // check localstorage has a token, setAUthToken if so
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
+    // declare response from backend, dispatch data to USER_LOADED
     try {
       const res = await axios.get('/api/auth');
 
@@ -38,6 +42,7 @@ const AuthState = (props) => {
         type: USER_LOADED,
         payload: res.data,
       });
+      // dispatch error msg to AUTH_ERROR
     } catch (error) {
       dispatch({
         type: AUTH_ERROR,
@@ -48,21 +53,26 @@ const AuthState = (props) => {
 
   // Register User
   const register = async (formData) => {
+    // declare config variable with header
     const config = {
       header: {
         'Content-Type': 'application/json',
       },
     };
 
+    // declare response from backend, post user data
     try {
       const res = await axios.post('/api/users', formData, config);
 
+      // dispatch data to reducer
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
 
+      // load user
       loadUser();
+      // dispatch error if found
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
@@ -73,12 +83,14 @@ const AuthState = (props) => {
 
   // Login User
   const login = async (formData) => {
+    // declare config variable with header
     const config = {
       header: {
         'Content-Type': 'application/json',
       },
     };
 
+    // declare response from post, dispatch to reducer
     try {
       const res = await axios.post('/api/auth', formData, config);
 
@@ -88,6 +100,7 @@ const AuthState = (props) => {
       });
 
       loadUser();
+      // dispatch error if found
     } catch (error) {
       dispatch({
         type: LOGIN_FAIL,
@@ -107,6 +120,7 @@ const AuthState = (props) => {
   };
 
   return (
+    // return all variables and functions to provider
     <AuthContext.Provider
       value={{
         token: state.token,

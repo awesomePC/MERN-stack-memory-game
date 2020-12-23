@@ -18,12 +18,16 @@ if (localStorage.token) {
 
 const App = () => {
   return (
+    // auth and history contexts
     <AuthState>
       <HistoryState>
+        {/* router for navigation */}
         <Router>
           <div className='App'>
+            {/* navbar component */}
             <Navbar />
             <div className='Routes'>
+              {/* private/public routes for app */}
               <Switch>
                 <PrivateRoute exact path='/' component={Home} />
                 <Route exact path='/signin' component={Signin} />

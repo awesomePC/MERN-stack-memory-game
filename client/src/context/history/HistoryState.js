@@ -11,6 +11,7 @@ import {
 } from '../types';
 
 const HistoryState = (props) => {
+  // declare initial state
   const initialState = {
     games: [],
     currentLevel: 'beginner',
@@ -18,10 +19,12 @@ const HistoryState = (props) => {
     error: null,
   };
 
+  // declare state and dispatch with usereducer hook
   const [state, dispatch] = useReducer(historyReducer, initialState);
 
   // Get games for user
   const getGames = async () => {
+    // declare response from backend, dispatch to reducer
     try {
       const res = await axios.get('/api/history');
 
@@ -29,6 +32,7 @@ const HistoryState = (props) => {
         type: GET_GAMES,
         payload: res.data,
       });
+      // dispatch errr msg if found
     } catch (error) {
       dispatch({
         type: GAME_ERROR,
@@ -73,6 +77,7 @@ const HistoryState = (props) => {
   };
 
   return (
+    // return all variables and functions to provider
     <HistoryContext.Provider
       value={{
         games: state.games,

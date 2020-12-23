@@ -7,13 +7,14 @@ const app = express();
 connectDB();
 
 // Initialize middleware
-app.use(express.json({ extended: false }))
+app.use(express.json({ extended: false }));
 
 // Define Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/history', require('./routes/history'));
 
+// Declare port
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

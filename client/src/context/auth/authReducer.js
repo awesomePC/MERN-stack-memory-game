@@ -9,7 +9,8 @@ import {
   REGISTER_SUCCESS,
 } from '../types';
 
-export default (state, action) => {
+// authReducer returns object state based on the type passed in using a switch
+const authReducer = (state, action) => {
   switch (action.type) {
     case USER_LOADED:
       return {
@@ -49,3 +50,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default authReducer;

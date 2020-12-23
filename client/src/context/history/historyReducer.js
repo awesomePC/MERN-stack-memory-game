@@ -6,7 +6,8 @@ import {
   GET_GAMES,
 } from '../types';
 
-export default (state, action) => {
+// historyReducer returns object state based on the type passed in using a switch
+const historyReducer = (state, action) => {
   switch (action.type) {
     case GET_GAMES:
       return {
@@ -37,3 +38,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default historyReducer;
