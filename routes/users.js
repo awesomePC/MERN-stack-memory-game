@@ -16,8 +16,8 @@ router.post(
   [
     check('name', 'Please enter a name').not().isEmpty(),
     check('email', 'Please enter valid email').isEmail(),
-    check('password', 'Password must be 5 or more characters').isLength({
-      min: 5,
+    check('password', 'Password must be 1 or more characters').isLength({
+      min: 1,
     }),
   ],
   async (req, res) => {

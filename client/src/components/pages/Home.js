@@ -65,7 +65,8 @@ const Home = () => {
           <div className='card blue-grey darken-1 large'>
             <div className='card-content white-text'>
               <span className='center card-title'>
-                You have played {games.length} games so far!
+                You have played {games.length}{' '}
+                {games.length === 1 ? 'game' : 'games'} so far!
               </span>
               <br></br>
               <br></br>
