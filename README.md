@@ -5,6 +5,7 @@ Web app similar to memory boardgame. Create an account, choose a difficulty leve
 To build a full stack MERN app from scratch equipt with user sign in. To practice building backend server and connecting to front end. To practice using state management in a React app.
 
 # Screenshot
+![screenshot](https://live.staticflickr.com/65535/50996655401_49ed9fbc3e_n.jpg)
 
 # Tech Used
 * HTML, CSS, MaterializeCSS, JS, React for front end
