@@ -14,5 +14,5 @@ To build a full stack MERN app from scratch equipt with user sign in. To practic
 * Nodemon and Concurrently for development
 * JWToken and Bcrypt for hashing passwords
 * Robohash for card images
-* Fetch API for image requests
+* Axios for image API requests
 * Heroku for deployment
