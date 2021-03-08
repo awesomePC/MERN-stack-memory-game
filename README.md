@@ -1,5 +1,5 @@
 # Memory Game Web App
-Web app similar to memory boardgame. Create an account, choose a difficulty level, choose a card theme, and fine all the pairs of cards! User score will update after each game.
+Web app similar to memory boardgame. Create an account, choose a difficulty level, choose a card theme, and find all the pairs of cards! User score will update after each game.
 
 # Motivation
 To build a full stack MERN app from scratch equipt with user sign in. To practice building backend server and connecting to front end. To practice using state management in a React app.
