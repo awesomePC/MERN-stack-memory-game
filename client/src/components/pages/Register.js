@@ -89,7 +89,7 @@ const Register = (props) => {
           </div>
           <div className='row'>
             <button
-              className='btn waves-effect waves-light red lighten-2 col s5 offset-s10'
+              className='btn waves-effect waves-light red lighten-2 col s9 m5 offset-s8 offset-m10'
               type='submit'
               name='action'
             >

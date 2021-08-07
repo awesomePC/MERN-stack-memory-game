@@ -39,7 +39,7 @@ const Navbar = () => {
     // materializeCSS navbar
     <nav>
       <div className='nav-wrapper'>
-        <a href='/' className='brand-logo'>
+        <a href='/' className='brand-logo left'>
           <i className='material-icons'>memory</i>
           Memory
         </a>

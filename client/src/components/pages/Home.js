@@ -8,12 +8,8 @@ const Home = () => {
   const historyContext = useContext(HistoryContext);
   const authContext = useContext(AuthContext);
 
-  const {
-    games,
-    updateCurrentLevel,
-    updateCurrentTheme,
-    getGames,
-  } = historyContext;
+  const { games, updateCurrentLevel, updateCurrentTheme, getGames } =
+    historyContext;
 
   // declare component level state
   const [chosenTheme, setChosenTheme] = useState('');
@@ -41,7 +37,7 @@ const Home = () => {
     if (gameArr.length > 0) {
       return Math.floor(gameArr.reduce((a, b) => a + b) / gameArr.length);
     } else {
-      return 'No games yet played';
+      return 'No games played';
     }
   };
 
@@ -64,25 +60,31 @@ const Home = () => {
         <div className='col s12'>
           <div className='card blue-grey darken-1 large'>
             <div className='card-content white-text'>
-              <span className='center card-title'>
+              <span className='center card-title hide-on-small-only'>
                 You have played {games.length}{' '}
                 {games.length === 1 ? 'game' : 'games'} so far!
               </span>
+              <span className='center card-title hide-on-med-and-up'>
+                {games.length} {games.length === 1 ? 'Game ' : 'Games '}
+                Played!
+              </span>
               <br></br>
-              <br></br>
-              <span className='center card-title'>
+              <span className='center card-title hide-on-small-only'>
                 Your Average Number of Moves:
+              </span>
+              <span className='center card-title hide-on-med-and-up'>
+                Average Moves:
               </span>
               <br></br>
               <div className='row col s12'>
                 <div className='col s4 center'>
-                  <u>Beginner</u>
+                  <u>Easy</u>
                 </div>
                 <div className='col s4 center'>
-                  <u>Intermediate</u>
+                  <u>Medium</u>
                 </div>
                 <div className='col s4 center'>
-                  <u>Expert</u>
+                  <u>Hard</u>
                 </div>
               </div>
               <div className='row col s12'>
@@ -104,7 +106,7 @@ const Home = () => {
               <br></br>
               <span className='center card-title'>Start A New Game Below!</span>
             </div>
-            <div className='center-align'>
+            <div className='row center-align'>
               <a
                 className='dropdown-trigger btn blue-grey darken-1'
                 href='#'
@@ -155,7 +157,7 @@ const Home = () => {
                   name='beginner'
                   onClick={onClick}
                 >
-                  Beginner
+                  Easy
                 </Link>
               </div>
               <div className='col s4 center'>
@@ -165,7 +167,8 @@ const Home = () => {
                   name='intermediate'
                   onClick={onClick}
                 >
-                  Intermediate
+                  <span className='hide-on-small-only'>Medium</span>
+                  <span className='hide-on-med-and-up'>Med</span>
                 </Link>
               </div>
               <div className='col s4 center'>
@@ -175,7 +178,7 @@ const Home = () => {
                   name='expert'
                   onClick={onClick}
                 >
-                  Expert
+                  Hard
                 </Link>
               </div>
             </div>
